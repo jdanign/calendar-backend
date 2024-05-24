@@ -123,6 +123,8 @@ const revalidarToken = async (req, res=response)=>{
     // Establece la respuesta a la ruta 
     res.json({
         ok: true,
+        uid,
+        name,
         token
     })
 }
