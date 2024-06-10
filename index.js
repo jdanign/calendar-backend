@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** Configuración de las variables de entorno con el paquete dotenv instalado con NPM. */
 require('dotenv').config();
 
@@ -37,6 +39,11 @@ app.use(express.json());
 // Lo que haya en el la ruta del require lo habilita en la ruta del primer parámetro
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
+
+// Cualquier ruta que no esté especificada anteriormente, usa la aplicación montada en el front.
+app.use('*', (req, res)=>
+    res.sendFile(path.join(__dirname, 'public/index.html'))
+);
 
 
 /** Escuchar peticiones en el puerto establecido en las variables de entorno. */
